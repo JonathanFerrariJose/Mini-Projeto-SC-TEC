@@ -28,3 +28,8 @@ def padronizar_canal(s):
 # aplicação das funções no DataFrame
 df["categoria_limpa"] = df["categoria"].apply(limpar_categoria)
 df["canal_pad"] = df["canal_venda"].apply(padronizar_canal)
+# Quantidade e preço
+df["quantidade_num"] = pd.to_numeric(df["quantidade"], errors="coerce")
+df["quantidade_ok"] = df["quantidade_num"].apply(lambda x: not pd.isna(x) and x > 0)
+df["preco_num"] = pd.to_numeric(df["preco_unitario"], errors="coerce")
+df["preco_ok"] = df["preco_num"].apply(lambda x: not pd.isna(x) and x >= 0)
